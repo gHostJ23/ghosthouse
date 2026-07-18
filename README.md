@@ -66,8 +66,8 @@ Documenting the configuration milestones, deployment hurdles, and infrastructure
 * **LXC 104 (`homarr`):** Deployed central dashboard UI (`192.168.8.155:7575`).
     * *Hiccup:* Triggered an API `404 (Not found)` error when attempting to embed Uptime Kuma widgets. Homarr's integration secrets defaulted to searching for a `default` page slug, while the Kuma page was generated under the `dashboard` slug.
     * *Resolution:* Corrected the API linkage by aligning the Status Page slug nomenclature and publishing a unified monitor group within Uptime Kuma.
-* **LXC 105 (`peanut`):** Stood up as a clean staging environment.
-    * *Progress:* Maintained as an empty sandbox. Earmarked for future scripting automation and bot testing to ensure production environments remain untouched during experimental builds.
+* **LXC 105 (`peanut`):** Deployed dedicated Uninterruptible Power Supply (UPS) telemetry tracker (`port 8080`).
+    * *Progress:* Transitioned from a staging sandbox into a production Network UPS Tools (NUT) dashboard utilizing the PeaNUT UI. Successfully mapped the CyberPower CP1500PFCLCDa UPS USB passthrough to track real-time load, voltage, and runtime data.
 * **LXC 106 (`crafty-controller`):** Deployed Java/Minecraft orchestration interface (`port 8443`).
     * *Hiccup:* Uptime Kuma failed to verify the service status due to Crafty Controller generating its own self-signed TLS/SSL security certificate out of the box. 
     * *Resolution:* Overrode strict TLS validation in Uptime Kuma's advanced settings, allowing the monitor to safely read the localized HTTPS traffic. (Also applied this exact resolution for the Proxmox VE root environment on port `8006`).
