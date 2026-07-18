@@ -46,7 +46,7 @@ The environment is built using isolated Linux Containers (LXCs) to maximize effi
 | **105** | `peanut` | Web GUI Port: `8090` | **Network UPS Tools:** Interfaces directly with the physical CyberPower UPS via USB passthrough. Hosts the PeaNUT UI to visualize active load, voltage curves, and battery runtime in real-time. |
 | **106** | `crafty-controller` | Web GUI Port: `8443` (HTTPS) | **Game Server Orchestration:** Minecraft server administration console handling localized instance configurations, backups, and live server resource monitoring. |
 | **107** | `qbittorrent` | Web GUI Port: `8090` | **Peer-to-Peer Client:** qBittorrent instance deployed for secure, localized file distribution, automation, and ISO management. |
-| **108** | `docker-engine` | Port: `9000` (Portainer) | **Container Orchestration Hub:** Modular Docker environment hosting Shoko Server and future application stacks. |
+| **108** | `docker-engine` | Web GUI Port: `9443` | **Container Orchestration Hub:** Modular Docker environment hosting Shoko Server and future application stacks. |
 
 ---
 
@@ -75,7 +75,7 @@ Documenting the configuration milestones, deployment hurdles, and infrastructure
 * **LXC 107 (`qbittorrent`):** Deployed dedicated peer-to-peer torrent client (`port: 8090`).
     * *Hiccup:* The client initially lacked the proper write permissions and completely failed to save any downloaded files to the central `ghostDrive` Samba storage.
     * *Resolution:* Deleted and re-created the instance as a **Privileged** container. This allowed qBittorrent to bypass the strict user-mapping restrictions of unprivileged containers and successfully write data directly to the network storage pool. A crucial and valuable lesson in how Proxmox handles UID/GID permission management across network shares.
-* **LXC 108 (`docker-engine`):** Deployed centralized Docker orchestration hub (`port: 9000`).
+* **LXC 108 (`docker-engine`):** Deployed Docker + Portainer UI (`Portaner config port: 9443`).
     * *Hiccup:* The installation process hung repeatedly at the initial menu load, failing to initialize the advanced configuration wizard.
     * *Resolution:* Performed a full browser cache refresh and shell restart, and transitioned to a default installation path to ensure environment stability and a successful container build.
 
