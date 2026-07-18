@@ -1,4 +1,4 @@
-# 👻 ghosthouse-lab
+# 👻 ghosthouse
 
 Welcome to the official repository for **ghosthouse**, a dedicated, self-hosted home laboratory environment built for media automation, network administration, localized data security, and game servers. My own personal Linux and Network playground.
 
