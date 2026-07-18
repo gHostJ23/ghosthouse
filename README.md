@@ -80,7 +80,7 @@ Documenting the configuration milestones, deployment hurdles, and infrastructure
     * *Resolution:* Performed a full browser cache refresh and shell restart, and transitioned to a default installation path to ensure environment stability and a successful container build.
 
 ---
-## 🚀 Future Roadmap & Project Pipeline
+## Future Roadmap & Project Pipeline
 The following checklist outlines the active development trajectory for the `ghosthouse` infrastructure. For a comprehensive breakdown of architectural dependencies, integration strategies, and the long-term vision for these services, please refer to the [Full Infrastructure Roadmap](/docs/roadmap.md).
 *Status: [Planned] | [Backlog]*
 
