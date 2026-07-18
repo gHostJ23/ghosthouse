@@ -46,7 +46,7 @@ The environment is built using isolated Linux Containers (LXCs) to maximize effi
 | **105** | `peanut` | Web GUI Port: `8090` | **Network UPS Tools:** Interfaces directly with the physical CyberPower UPS via USB passthrough. Hosts the PeaNUT UI to visualize active load, voltage curves, and battery runtime in real-time. |
 | **106** | `crafty-controller` | Web GUI Port: `8443` (HTTPS) | **Game Server Orchestration:** Minecraft server administration console handling localized instance configurations, backups, and live server resource monitoring. |
 | **107** | `qbittorrent` | Web GUI Port: `8090` | **Peer-to-Peer Client:** qBittorrent instance deployed for secure, localized file distribution, automation, and ISO management. |
-| **108** | `docker-engine` | Web GUI Port: `9443` | **Container Orchestration Hub:** Modular Docker environment hosting Shoko Server and future application stacks. |
+| **108** | `docker` | Web GUI Port: `9443` | **Container Orchestration Hub:** Modular Docker environment hosting Shoko Server and future application stacks. |
 
 ---
 
@@ -75,10 +75,22 @@ Documenting the configuration milestones, deployment hurdles, and infrastructure
 * **LXC 107 (`qbittorrent`):** Deployed dedicated peer-to-peer torrent client (`port: 8090`).
     * *Hiccup:* The client initially lacked the proper write permissions and completely failed to save any downloaded files to the central `ghostDrive` Samba storage.
     * *Resolution:* Deleted and re-created the instance as a **Privileged** container. This allowed qBittorrent to bypass the strict user-mapping restrictions of unprivileged containers and successfully write data directly to the network storage pool. A crucial and valuable lesson in how Proxmox handles UID/GID permission management across network shares.
-* **LXC 108 (`docker-engine`):** Deployed Docker + Portainer UI (`Portaner config port: 9443`).
+* **LXC 108 (`docker`):** Deployed Docker + Portainer UI (`Portaner config port: 9443`).
     * *Hiccup:* The installation process hung repeatedly at the initial menu load, failing to initialize the advanced configuration wizard.
     * *Resolution:* Performed a full browser cache refresh and shell restart, and transitioned to a default installation path to ensure environment stability and a successful container build.
 
+---
+## 🚀 Future Roadmap & Project Pipeline
+The following checklist outlines the active development trajectory for the `ghosthouse` infrastructure. For a comprehensive breakdown of architectural dependencies, integration strategies, and the long-term vision for these services, please refer to the [Full Infrastructure Roadmap](/docs/roadmap.md).
+*Status: [Planned] | [Backlog]*
+
+- [ ] **Shoko Server + Shokofin** ([PLANNED]): Anime metadata engine for Jellyfin.
+- [ ] **Tailscale** ([PLANNED]): Remote mesh-VPN access layer.
+- [ ] **Immich** ([Backlog]): Intelligent photo/video backup suite.
+- [ ] **Nextcloud** ([Backlog]): Private cloud and document sync.
+- [ ] **Sonarr / Radarr** ([Backlog]): Media automation orchestration.
+- [ ] **Komga** ([Backlog]): Comic/Manga library management.
+- [ ] **Mealie** ([Backlog]): Kitchen/Recipe management engine.
 ---
 
 > **Security Warning:** This repository tracks configuration framework logic and structural maps only. Production security credentials, environment tokens, private keys, and hardware MAC definitions are strictly filtered out of this public repository to safeguard the internal integrity of the `ghosthouse` network infrastructure.
