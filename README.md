@@ -47,6 +47,9 @@ The environment is built using isolated Linux Containers (LXCs) to maximize effi
 | **106** | `crafty-controller` | Web GUI Port: `8443` (HTTPS) | **Game Server Orchestration:** Minecraft server administration console handling localized instance configurations, backups, and live server resource monitoring. |
 | **107** | `qbittorrent` | Web GUI Port: `8090` | **Peer-to-Peer Client:** qBittorrent instance deployed for secure, localized file distribution, automation, and ISO management. |
 | **108** | `docker` | Web GUI Port: `9443` | **Container Orchestration Hub:** Modular Docker environment hosting Shoko Server and future application stacks. |
+| 109 | `prowlarr` | Web GUI Port: `9696` | **Indexer Management Hub:** Centralized proxy and manager for torrent indexers, automatically syncing feed configurations directly into Sonarr and Radarr. |
+| 110 | `sonarr` | Web GUI Port: `8989` | **TV Series Automation PVR:** Automated television library management system that monitors feeds, interfaces with qBittorrent, and organizes media assets. |
+| 111 | `radarr` | Web GUI Port: `7878` | **Movie Collection PVR:** Automated movie management engine for monitoring release feeds, orchestrating download pipelines, and structuring movie libraries. |
 
 ---
 
@@ -78,6 +81,20 @@ Documenting the configuration milestones, deployment hurdles, and infrastructure
 * **LXC 108 (`docker`):** Deployed Docker + Portainer UI (`Portaner config port: 9443`).
     * *Hiccup:* The installation process hung repeatedly at the initial menu load, failing to initialize the advanced configuration wizard.
     * *Resolution:* Performed a full browser cache refresh and shell restart, and transitioned to a default installation path to ensure environment stability and a successful container build.
+* **LXC 109 ( `prowlarr` ):** Deployed centralized indexer proxy and management service ( port: `9696` ).
+  * *Hiccup:* Initial automated synchronization tests to downstream *arr instances failed due to mismatched API authorization headers and localized application port mismatches.
+  * *Resolution:* Standardized API key exchange across LXCs and configured tag-based auto-sync profiles to seamlessly push indexers to Sonarr and Radarr.
+* **LXC 110 ( `sonarr` ):** Deployed TV show collection service ( port: `8989` ).
+  * *Hiccup:* Encountered media import failures when moving completed downloads from `qbittorrent` (LXC 107) to the `ghostDrive` storage pool due to unaligned file path mappings.
+  * *Resolution:* Configured standardized Remote Path Mappings within Sonarr to reconcile container path discrepancies between the download client and storage mounts.
+* **LXC 111 ( `radarr` ):** Deployed movie automation PVR ( port: `7878` ).
+  * *Hiccup:* Experienced file permission write errors (`Access to path is denied`) when attempting to rename and relocate processed movie files to `ghostDrive`.
+  * *Resolution:* Aligned local container UID/GID permission maps with the SMB/Samba share privileges established on `ghostDrive` (LXC 100), ensuring frictionless read/write access.
+
+    
+* **Router Infrastructure ( GL.iNet Flint 2 / Tailscale ):** Configured hardware-level mesh-VPN access layer.
+  * *Progress:* Deployed Tailscale directly on the main router firmware and enabled local subnet routing (`192.168.8.0/24`).
+  * *Outcome:* Established encrypted, zero-trust remote access to the entire `ghosthouse` server matrix from off-grid devices without opening public WAN ports or running individual VPN clients per container.
 
 ---
 ## Future Roadmap & Project Pipeline
@@ -85,10 +102,10 @@ The following checklist outlines the active development trajectory for the `ghos
 *Status: [Planned] | [Backlog]*
 
 - [ ] **Shoko Server + Shokofin** ([PLANNED]): Anime metadata engine for Jellyfin.
-- [ ] **Tailscale** ([PLANNED]): Remote mesh-VPN access layer.
+- [X] **Tailscale** ([PLANNED]): Remote mesh-VPN access layer.
 - [ ] **Immich** ([Backlog]): Intelligent photo/video backup suite.
 - [ ] **Nextcloud** ([Backlog]): Private cloud and document sync.
-- [ ] **Sonarr / Radarr** ([Backlog]): Media automation orchestration.
+- [X] **Sonarr / Radarr** ([Backlog]): Media automation orchestration.
 - [ ] **Komga** ([Backlog]): Comic/Manga library management.
 - [ ] **Mealie** ([Backlog]): Kitchen/Recipe management engine.
 ---
