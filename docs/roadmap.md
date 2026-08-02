@@ -27,3 +27,30 @@ This document outlines the strategic integration of new services into the `ghost
 *   **Mealie:** 
     *   *Role:* Recipe management and kitchen planning.
     *   *Interaction:* Web-based service to track household nutrition data; will eventually integrate with localized backup scripts for database protection.
+
+### Phase 3: Hardware Expansion & Local AI Engine (Future)
+*   **Local AI Smart Home Assistant:**
+    *   *Role:* Offline, privacy-first voice assistant and natural language automation engine.
+    *   *Interaction:* Interfaces directly with Home Assistant via the Wyoming Protocol. Requires a dedicated low-profile PCIe GPU installed in the host server to execute localized Ollama LLM queries, Faster-Whisper STT transcription, and custom TTS audio synthesis. Captures audio via ESP32-S3 hardware room nodes.
+
+### Checklist: Local AI Smart Home Assistant
+
+This project introduces a fully localized, privacy-first voice assistant integrated seamlessly with Home Assistant. The architecture relies on an offline Large Language Model (LLM) for processing natural language commands and smart home function calling, bridging the gap between standard home automation and conversational AI without relying on cloud infrastructure.
+
+**Architecture & Pipeline Breakdown**
+
+*   **Core Orchestration:** Home Assistant handling localized device integration, internal network automations, and Wyoming Protocol routing.
+*   **Compute Engine:** Hardware GPU upgrade for the Dell OptiPlex (e.g., Low-Profile NVIDIA RTX 3050 / A2000) to natively power localized AI processing.
+*   **Local Language Model (LLM):** Ollama deployment to process contextual requests, determine intent, and trigger home automation scripts via function calling.
+*   **Speech-to-Text (STT):** Faster-Whisper engine for rapid, multilingual transcription, seamlessly detecting and parsing English and Japanese audio input.
+*   **Text-to-Speech (TTS):** Dedicated voice synthesis engine configured with a custom vocal profile for dynamic, localized audio generation and personality emulation.
+*   **Hardware Satellites:** ESP32-S3 open-source microcontrollers (via ESPHome) deployed as physical room nodes, utilizing localized wake-word detection to trigger the assistant pipeline.
+
+**Deployment Trajectory**
+
+- [ ] Procure and install low-profile PCIe GPU into the OptiPlex host.
+- [ ] Deploy Home Assistant & establish the Wyoming Protocol integration layer.
+- [ ] Spin up local Ollama instance & configure Home Assistant function calling.
+- [ ] Configure Faster-Whisper for offline, multilingual STT processing.
+- [ ] Implement custom-profile TTS engine for synthesized audio feedback.
+- [ ] Flash and deploy ESP32-S3 room satellites for localized wake-word detection.
