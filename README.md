@@ -108,6 +108,7 @@ The following checklist outlines the active development trajectory for the `ghos
 - [X] **Sonarr / Radarr** ([Backlog]): Media automation orchestration.
 - [ ] **Komga** ([Backlog]): Comic/Manga library management.
 - [ ] **Mealie** ([Backlog]): Kitchen/Recipe management engine.
+- [ ] **Local AI Assistant** ([Future]): Multilingual offline voice assistant and home automation hub.
 ---
 
 > **Security Warning:** This repository tracks configuration framework logic and structural maps only. Production security credentials, environment tokens, private keys, and hardware MAC definitions are strictly filtered out of this public repository to safeguard the internal integrity of the `ghosthouse` network infrastructure.
