@@ -7,7 +7,7 @@ This document outlines the strategic integration of new services into the `ghost
 *   **Shoko Server + Shokofin:** 
     *   *Role:* Specialized anime metadata management.
     *   *Interaction:* Acts as the primary metadata provider for the `jellyfin` (LXC 102) media library. Requires read/write access to `ghostDrive` (LXC 100).
-*   **Tailscale:** 
+*   ~~**Tailscale:**~~ **(COMPLETED)**
     *   *Role:* Secure remote access layer.
     *   *Interaction:* Will join the `ghosthouse` lab to your existing Tailscale mesh VPN. This enables secure, cross-device access to all lab services (Webmin, Portainer, etc.) without requiring port forwarding or public firewall exposure.
 
@@ -18,12 +18,15 @@ This document outlines the strategic integration of new services into the `ghost
 *   **Nextcloud:** 
     *   *Role:* Private cloud suite for file sync and productivity.
     *   *Interaction:* Will replace external cloud storage for sensitive document management and automated backups from local workstations.
-*   **Sonarr / Radarr:** 
+*   ~~**Sonarr / Radarr:**~~ **(COMPLETED)**
     *   *Role:* Automated media acquisition workflows.
     *   *Interaction:* Dependent on `qbittorrent` (LXC 107) for file transfers and `ghostDrive` for final media delivery to `jellyfin`.
-*   **Komga:** 
+*   ~~**Komga:**~~ **(COMPLETED)**
     *   *Role:* Manga and comic book server.
     *   *Interaction:* Dedicated library reader that draws from `ghostDrive` collections.
+*   **Nginx Proxy Manager:**
+    *    *Role:* Network reverse proxy and SSL certificate management.
+    *    *Interaction:* Consolidates internal routing by directing local traffic or external requests to the correct LXC ports, providing a streamlined access layer without memorizing individual IP addresses.
 *   **Mealie:** 
     *   *Role:* Recipe management and kitchen planning.
     *   *Interaction:* Web-based service to track household nutrition data; will eventually integrate with localized backup scripts for database protection.
@@ -48,9 +51,9 @@ This project introduces a fully localized, privacy-first voice assistant integra
 
 **Deployment Trajectory**
 
-- [ ] Procure and install low-profile PCIe GPU into the OptiPlex host.
-- [ ] Deploy Home Assistant & establish the Wyoming Protocol integration layer.
-- [ ] Spin up local Ollama instance & configure Home Assistant function calling.
+- [ ] Procure and install low-profile PCIe GPU into the OptiPlex.
+- [ ] Deploy Home Assistant & establish integration layer.
+- [ ] Configure Ollama instance & configure Home Assistant function calling.
 - [ ] Configure Faster-Whisper for offline, multilingual STT processing.
 - [ ] Implement custom-profile TTS engine for synthesized audio feedback.
 - [ ] Flash and deploy ESP32-S3 room satellites for localized wake-word detection.
