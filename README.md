@@ -50,7 +50,7 @@ The environment is built using isolated Linux Containers (LXCs) to maximize effi
 | 109 | `prowlarr` | Web GUI Port: `9696` | **Indexer Management Hub:** Centralized proxy and manager for torrent indexers, automatically syncing feed configurations directly into Sonarr and Radarr. |
 | 110 | `sonarr` | Web GUI Port: `8989` | **TV Series Automation PVR:** Automated television library management system that monitors feeds, interfaces with qBittorrent, and organizes media assets. |
 | 111 | `radarr` | Web GUI Port: `7878` | **Movie Collection PVR:** Automated movie management engine for monitoring release feeds, orchestrating download pipelines, and structuring movie libraries. |
-
+| 112 | `komga` | Web GUI Port: `25600` | **Comic/Manga Library Server:** Specialized media delivery platform for comic, manga, and reading materials drawing directly from personal storage archive. |
 ---
 
 ## Project Timeline & Development Changelog
@@ -90,7 +90,9 @@ Documenting the configuration milestones, deployment hurdles, and infrastructure
 * **LXC 111 ( `radarr` ):** Deployed movie automation PVR ( port: `7878` ).
   * *Hiccup:* Experienced file permission write errors (`Access to path is denied`) when attempting to rename and relocate processed movie files to `ghostDrive`.
   * *Resolution:* Aligned local container UID/GID permission maps with the SMB/Samba share privileges established on `ghostDrive` (LXC 100), ensuring frictionless read/write access.
-
+* **LXC 112 ( `komga` ):** Deployed centralized manga and comic library management service ( port: `25600` ).
+  * *Hiccup:* The installation script hung indefinitely at "Updating Container OS" due to network timeouts when trying to resolve IPv6 addresses via the Debian package manager.
+  * *Resolution:* Reran the deployment script utilizing Advanced Settings to explicitly disable IPv6 on the container, forcing an IPv4 connection and allowing the OS update to complete successfully.
     
 * **Router Infrastructure ( GL.iNet Flint 2 / Tailscale ):** Configured hardware-level mesh-VPN access layer.
   * *Progress:* Deployed Tailscale directly on the main router firmware and enabled local subnet routing (`192.168.8.0/24`).
@@ -106,8 +108,9 @@ The following checklist outlines the active development trajectory for the `ghos
 - [ ] **Immich** ([Backlog]): Intelligent photo/video backup suite.
 - [ ] **Nextcloud** ([Backlog]): Private cloud and document sync.
 - [X] **Sonarr / Radarr** ([Backlog]): Media automation orchestration.
-- [ ] **Komga** ([Backlog]): Comic/Manga library management.
+- [X] **Komga** ([Backlog]): Comic/Manga library management.
 - [ ] **Mealie** ([Backlog]): Kitchen/Recipe management engine.
+- [ ] **Nginx Proxy Manager** ([Backlog]): Reverse proxy and SSL certificate / cache management.
 - [ ] **Local AI Assistant** ([Future]): Multilingual offline voice assistant and home automation hub.
 ---
 
@@ -116,4 +119,4 @@ The following checklist outlines the active development trajectory for the `ghos
 > ---
 
 ## 🛠️ Development & Documentation Methodology
-This repository and its infrastructure layout were engineered using an AI-assisted development workflow. LOCAL Large Language Models (Codestral (22B) + Qwen 2.5 (32B) Models) were utilized as strategic troubleshooting partners for optimizing container routing, parsing complex log errors, and accelerating initial markdown documentation frameworks.
+This repository and its infrastructure layout were engineered using an AI-assisted development workflow. LOCAL Large Language Models (Codestral (22B) + Qwen 2.5 (32B) Models) were utilized as strategic troubleshooting partners for optimizing container routing, parsing complex log errors, and accelerating markdown documentation frameworks.
